@@ -1,0 +1,135 @@
+# Python .gitignore
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+env.bak/
+# Add if you use poetry or pipenv for virtual environments
+.pipenv/
+.poetry/
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+db.sqlite3
+# Ignore Django migration files if you want (optional)
+**/migrations/*
+!**/migrations/__init__.py
+
+# Local settings
+local_settings.py
+
+# Static and media files
+staticfiles/
+media/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Pytest cache
+.pytest_cache/
+
+# MyPy cache
+.mypy_cache/
+
+# Bandit (security linter) logs
+.bandit/
+
+# Flask & Django environments
+instance/
+.webassets-cache
+
+# VSCode .gitignore
+
+# Exclude the entire .vscode directory except for settings.json, which is often useful for project-specific settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# Exclude the Python Language Server folder
+.vscode/.ropeproject
+
+# Unit test / coverage results
+.pytest_cache/
+.pytest_cache/v/*
+
+
+
+# Ubuntu / Linux specific .gitignore
+
+# Temporary files created by editors or operating systems
+*~
+*.swp
+*.swo
+*.bak
+*.orig
+
+# Thumbnails
+.thumbnails/
+
+# Trash folder which is used in Ubuntu
+.Trash-*/
+
+# Logs
+*.log
+*.err
+*.out
+
+# Systemd and Upstart files
+*.override
+
+# Lock files
+*.lock
+
+# Package manager files
+*.deb
+*.rpm
+
+# Snap package files
+.snap/
+
+# APT lists
+/var/lib/apt/lists/
+
+# Cache files
+.cache/
+*.pid
+
+# Machine-specific files
+/etc/*
+/boot/*
+/lib/modules/*
+/proc/*
+/sys/*
+/usr/lib/
+
+# Secret or config files that should not be tracked
+.env
+*.env.local
+*.local
+
+# SSH files (if you're working with SSH configurations)
+/etc/ssh/*
