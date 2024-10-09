@@ -7,11 +7,13 @@ from django.core.mail import BadHeaderError
 from smtplib import SMTPException
 import socket
 from django.conf import settings
+from django.http import request
 
 class EmailSender:
-    def __init__(self, subject, from_email=settings.EMAIL_HOST_USER):
+    def __init__(self,request:request, subject, from_email=settings.EMAIL_HOST_USER):
         self.subject = subject
         self.from_email = from_email
+        self.request = request
 
     def send_email_async(self, html_content, text_content, to):
         try:
@@ -50,7 +52,7 @@ class EmailSender:
             # Automatically determine the scheme based on the request
             scheme = 'https' if request.is_secure() else 'http'
             
-            link = f"{scheme}://{FRONT_END_HOST_FULL_URL}?uid={uid}&token={token}"
+            link = f"{scheme}://{self.request.gethost()}?uid={uid}&token={token}"
 
             html_content = render_to_string('forgot-password_template.html', {
                 'email': email,
