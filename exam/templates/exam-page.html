@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/exam-page.css' %}">
+    <title>Ashot Examining Platform</title>
+</head>
+<body>
+    <div class="container">
+        <div class="log">
+            <img src="{% static 'images/brand-logo.png' %}" alt="Ashot Logo">
+        </div>
+
+        <div class="num">
+            <p>1 of 100</p>
+        </div>
+
+        <div class="quest">
+            <h1>What is the full meaning of HTTPS?</h1>
+        </div>
+
+        <div class="questio">
+            <div class="formcon">
+                <div class="form">
+                    <label class="custom-radio">
+                        <input type="radio" name="option" value="1">
+                        <span class="radio-btn"></span>
+                        Hypertext Transfer Protocol Secure
+                    </label>
+                </div>
+                <div class="form">
+                    <label class="custom-radio">
+                        <input type="radio" name="option" value="2">
+                        <span class="radio-btn"></span>
+                        Hypertext Transfer Protocol Simple
+                    </label>
+                </div>
+            </div>
+            <div class="formcon">
+                <div class="form">
+                    <label class="custom-radio">
+                        <input type="radio" name="option" value="3">
+                        <span class="radio-btn"></span>
+                        Hypertext Transfer Protocol Secure Hypertext
+                    </label>
+                </div>
+                <div class="form">
+                    <label class="custom-radio">
+                        <input type="radio" name="option" value="4">
+                        <span class="radio-btn"></span>
+                        Hypertext Transfer Protocol Security
+                    </label>
+                </div>
+            </div>
+            <div class="btn">
+                <button>Next</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

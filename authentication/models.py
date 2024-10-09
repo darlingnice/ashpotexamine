@@ -37,28 +37,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.user_id
    
 
-from django.db import models
-
-class Course(models.TextChoices):
-    FRONTEND = 'FRONTEND', 'Frontend Web Development'
-    FULLSTACK = 'FULLSTACK', 'Full Stack Web Development'
-    BACKEND = 'BACKEND', 'Backend Web Development'
-    DATASCIENCE = 'DATASCIENCE', 'Data Science (Machine Learning and AI)'
-    DATAANALYTICS = 'DATAANALYTICS' 'Data Analytics'
-    PYTHON = 'PYTHON' 'Full Python Course'
-    MOBILE = 'MOBILE', 'Mobile App Development'
-    UXUI = 'UXUI', 'UX/UI Design'
-    CLOUD = 'CLOUD', 'Cloud Computing'
-    ETICALHACK = 'ETICALHAC' 'Etical Hacking'
-    CYBERSEC = 'CYBERSEC', 'Cybersecurity'
-    NETWORKING = 'NETWORKING', 'CISCO Networking'
 
 
-class CourseOffered(models.Model):
-    user_id = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
-    course = models.CharField(
-        max_length=50,
-        choices=Course.choices,
-        default=Course.FRONTEND,
-    )
 

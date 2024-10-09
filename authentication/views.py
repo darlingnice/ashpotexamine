@@ -59,7 +59,7 @@ def login(request):
 
                 elif user.is_student and user.is_active:
                     LoggingMixin(f'Successfully Logged in as {user.first_name}').log()
-                    return  redirect('exam_onboarding')  
+                    return  redirect('exam')  
             LoggingMixin('Either UserID or Password is incorrect').log()
             messages.error(request,"Either User ID or Password is incorrect")
             return render(request=request,template_name="index.html",content_type='text/html',context= {})

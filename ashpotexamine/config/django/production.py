@@ -4,7 +4,9 @@ from .base import *
 ALLOWED_HOSTS =  ['127.0.0.1','.pythonanywhere.com','digitalocean.com']
 
 INSTALLED_APPS +=[
-   'utilitities'
+   'utilitities',
+   'tokens_app'
+
 
 ]
 DATABASES = {

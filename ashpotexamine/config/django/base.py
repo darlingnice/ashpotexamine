@@ -21,14 +21,10 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 
 # DEBUG = os.environ.get('DJANGO_DEBUG',"False") == "True"
-DEBUG = False
+DEBUG = True
 
 
 # ALLOWED_HOSTS = [] if os.environ.get('DJANGO_DEBUG') == "True" else 
-
-
-FRONT_END_HOST_FULL_URL = f"{CORS_ALLOWED_ORIGINS[0]}/{FRONTEND_SERVER_PORT}/{FRONTEND_EMAIL_HTML}"
-
 
 # Application definition
 
@@ -49,7 +45,8 @@ INSTALLED_APPS = [
 
     #custom apps
     'authentication',
-    'tokens_app',
+    'exam',
+   
     
 ]
 
