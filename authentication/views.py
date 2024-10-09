@@ -48,19 +48,24 @@ def login(request):
                             otp_email = EmailSender(subject='Login OTP')
                             # call the send_otp_email method to actually do the email sending
                             otp_email.send_otp_email(email=user.email, first_name=user.first_name, otp_code=otp,time = OTP_EXPIRATION_TIME)
-                            return redirect('')
+                            messages.success(request=request,message=f"OTP sent to {user.email}")
+                            return redirect('verify_mail')
+                            
                         except Exception as e:
-                            return   redirect('verify_mail')
+                            LoggingMixin(f"Error occured while sending mail :{e}")
+                            print(e)
+                            messages.success(request=request,message=f"{e}")
+                            return render(request=request,template_name='index.html',content_type='text/html',context={})
 
                 elif user.is_student and user.is_active:
                     LoggingMixin(f'Successfully Logged in as {user.first_name}').log()
                     return  redirect('exam_onboarding')  
             LoggingMixin('Either UserID or Password is incorrect').log()
-            messages.error(request,"Either UserID or Password is incorrect")
+            messages.error(request,"Either User ID or Password is incorrect")
             return render(request=request,template_name="index.html",content_type='text/html',context= {})
         except CustomUser.DoesNotExist:
-            LoggingMixin('Either UserID or Password is incorrect').log()
-            messages.success(request,message="Either UserID or Password is incorrect")
+            LoggingMixin('Either User ID or Password is incorrect').log()
+            messages.success(request,message="Either User ID or Password is incorrect")
             return render(request=request,template_name="index.html",content_type='text/html',context= {})
     else:
         return render(request=request,template_name='index.html',content_type='text/html',context={})
