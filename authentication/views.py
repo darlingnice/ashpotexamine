@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
@@ -13,6 +14,10 @@ from utilitities.email import EmailSender
 from utilitities.otp import get_otp
 from ashpotexamine.config.django.base import DEBUG
 from utilitities.logging import LoggingMixin
+
+
+def home(request):
+    return render(request=request,template_name='index.html',content_type='text/html',context={})
 
 
 @api_view(["POST"])

@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css'  %}">
+    <title>Ashpot examination</title>
+</head>
+<body>
+    <nav>
+        
+        <img src="{% static 'images/2019 logo full trans for white.png' %}" alt="2019 logo full trans for white.png">
+
+        <a href="https://www.ashpotmicrosystems.com">Continue with Ashpot</a>
+    </nav>
+    <h1>Start assessment <br>with <span>ashpot</span></h1>
+
+    <div class="form">
+        <div class="bac">
+            <form action="">
+                <label for="user id">User ID</label><br>
+                <input type="text" name="user id" id="user id"><br>
+                <label for="ID password">ID password</label><br>
+                <input type="password" name="id password" id="id password"><br>
+                <button>Sign up</button>
+            </form>
+        </div> 
+    </div>
+</body>
+</html>
