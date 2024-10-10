@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import  Stack,Course, ScheduledExam,  StudentAnswer, Result,Question
+from .models import  Course, ScheduledExam,  StudentAnswer, Result,Question
 
 
-admin.site.register(Stack)
 
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('name', 'created_at', 'updated_at')

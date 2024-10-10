@@ -6,5 +6,5 @@ urlpatterns =[
     path('', views.home, name='home'),
     path('login/', views.login, name='login'),
     path('verify-email',views.verify_mail,name='verify_mail'),
-    path('onboarding/',views.exam_onboarding,name='exam_onboarding')
+    path('onboarding/<str:id>',views.exam_onboarding,name='exam_onboarding')
 ]

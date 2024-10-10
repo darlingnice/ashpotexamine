@@ -13,7 +13,7 @@ from ashpotexamine.config.django.base import DEBUG
 # for messaging
 from utilitities.logging import LoggingMixin
 from django.contrib import messages
-
+from exam.models import ScheduledExam
 
 
 def home(request):
@@ -23,10 +23,11 @@ def verify_mail(request):
     return render(request=request,template_name='admin-otp.html',content_type='text/html',context={})
 
 
-def exam_onboarding(request):
-    return render(request=request,template_name='exam-onboarding.html',content_type='text/html',context={})
+def exam_onboarding(request,id):
+    info = ScheduledExam.objects.filter(id =id).first()
+    return render(request=request,template_name='exam-onboarding.html',content_type='text/html',context={"schedule":info})
 
-def login(request):
+def login(request):   
     if request.method == "POST":
         user_id = request.POST.get('userid')
         password = request.POST.get('password')
@@ -53,13 +54,15 @@ def login(request):
                             
                         except Exception as e:
                             LoggingMixin(f"Error occured while sending mail :{e}")
-                            print(e)
                             messages.success(request=request,message=f"{e}")
                             return render(request=request,template_name='index.html',content_type='text/html',context={})
 
                 elif user.is_student and user.is_active:
                     LoggingMixin(f'Successfully Logged in as {user.first_name}').log()
-                    return  redirect('exam')  
+                    # get the scheduled exam information
+                    user = CustomUser.objects.filter(user_id=user_id).first()
+                    info = ScheduledExam.objects.filter(user =user).first().pk
+                    return  redirect('exam_onboarding',info)  
             LoggingMixin('Either UserID or Password is incorrect').log()
             messages.error(request,"Either User ID or Password is incorrect")
             return render(request=request,template_name="index.html",content_type='text/html',context= {})
