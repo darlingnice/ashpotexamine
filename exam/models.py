@@ -39,6 +39,7 @@ class ScheduledExam(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     expiry_date = models.DateField()
+    num_questions = models.IntegerField()
     duration = models.IntegerField()  # Duration in minutes
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

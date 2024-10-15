@@ -14,6 +14,12 @@ from ashpotexamine.config.django.base import DEBUG
 from utilitities.logging import LoggingMixin
 from django.contrib import messages
 from exam.models import ScheduledExam
+import os
+from exam.models import Question
+import random
+
+    # Initializes list for shuffled questions
+list_of_exam_shuffled_questions_number = []
 
 
 def home(request):
@@ -22,10 +28,50 @@ def home(request):
 def verify_mail(request):
     return render(request=request,template_name='admin-otp.html',content_type='text/html',context={})
 
+# def exam_onboarding(request, id):
+
+#     # Fetch all question IDs
+#     qtns = Question.objects.all()
+#     lst = [q.id for q in qtns]
+    
+#     # Shuffle the list of question IDs
+#     random.shuffle(lst)
+#        # Fetch scheduled exam info
+#     info = ScheduledExam.objects.filter(id=id).first()
+#     # Add the shuffled question IDs to list_of_exam_shuffled_questions_number
+#     global list_of_exam_shuffled_questions_number
+#     list_of_exam_shuffled_questions_number = lst[:info.num_questions ]
+
+
+#     if info is None:
+#         return render(request=request, template_name='exam-onboarding.html', content_type='text/html', context={"schedule": info})
+
+
+#     return render(request=request,template_name='exam-onboarding.html',content_type='text/html',context={"schedule":info,'id':info.id})
+
+    # # Pass the shuffled questions to the template or use them as needed
+    # return render(request, 'exam-onboarding.html', context={"schedule": info, "shuffled_questions": list_of_exam_shuffled_questions_number})
+
+
+
 
 def exam_onboarding(request,id):
+   
     info = ScheduledExam.objects.filter(id =id).first()
-    return render(request=request,template_name='exam-onboarding.html',content_type='text/html',context={"schedule":info})
+    if info is None :
+        return render(request=request,template_name='exam-onboarding.html',content_type='text/html',context={"schedule":info})
+   
+    #  Fetch all question IDs
+    qtns = Question.objects.all()
+    lst = [q.id for q in qtns]
+
+    # Shuffle the list of question IDs
+    random.shuffle(lst)
+    for x in lst[:info.num_questions]:
+        list_of_exam_shuffled_questions_number.append(x)
+    print(list_of_exam_shuffled_questions_number)    
+    return render(request=request,template_name='exam-onboarding.html',content_type='text/html',context={"schedule":info,'id':info.id})
+
 
 def login(request):   
     if request.method == "POST":
@@ -61,7 +107,12 @@ def login(request):
                     LoggingMixin(f'Successfully Logged in as {user.first_name}').log()
                     # get the scheduled exam information
                     user = CustomUser.objects.filter(user_id=user_id).first()
-                    info = ScheduledExam.objects.filter(user =user).first().pk
+                    record= ScheduledExam.objects.filter(user =user).first()
+                    if record:
+                        info = record.pk
+                    else:
+                        info = 0    
+
                     return  redirect('exam_onboarding',info)  
             LoggingMixin('Either UserID or Password is incorrect').log()
             messages.error(request,"Either User ID or Password is incorrect")

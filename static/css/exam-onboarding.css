@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Futura LT';
+}
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin: 20px 100px 0 100px;
+}
+nav img{
+    width: 150px;
+}
+nav a{
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+}
+.content{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.content img{
+    width: 100px;
+    margin: 57px 0 16px;
+}
+.content h1{
+    margin-bottom: 12px;
+    font-weight: normal;
+    font-size: 40px;
+}
+#btn-getstarted{
+    width: 70%;
+    background-color: #F58634;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 100px;
+    border-radius: 5px;
+    font-weight: 500;
+}

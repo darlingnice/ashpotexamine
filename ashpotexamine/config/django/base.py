@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #third party apps
     'django_extensions',
-    # 'rest_framework',
+    'rest_framework',
     # 'rest_framework_simplejwt',
     # 'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
@@ -133,3 +133,16 @@ LOGIN_REDIRECT_URL = '/onboarding/'
 
 # importing all third party settings
 from ashpotexamine.config.settings.cors import *
+
+EST_FRAMEWORK = {
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+      
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
+     'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+}

@@ -9,55 +9,98 @@
 </head>
 <body>
     <div class="container">
+        {% csrf_token %}
         <div class="log">
             <img src="{% static 'images/brand-logo.png' %}" alt="Ashot Logo">
         </div>
-
-        <div class="num">
-            <p>1 of 100</p>
+        <div class="counter">
+           <div> <p><span  id="question-number",name="question-number">0</span> of <span    id="total-questions">{{ record.num_questions }}</span></p>
+          </div>
+            <div><p id="examTimer">Remaining time : {{ record.duration }}  minutes</p></div>
+        </div>
+ <p id="record-id" style="display: none;">{{ record.id }}</p>
+        <div class="question-container" >
+            <p id="question-displayer">Sample quesetion</p>
         </div>
 
-        <div class="quest">
-            <h1>What is the full meaning of HTTPS?</h1>
+        <div class="options-contaner">
+            <div class="optionsAC">
+                <div id="optionA">
+                    <input type="radio" name="options" class="opions" value="A">
+                    <label for="A" id="lbl-A">Sample text A</label>
+                </div>
+                <div id="optionC">
+                    <input type="radio" name="options" class="opions" value="C">
+                    <label for="C" id="lbl-C">Sample text C</label>
+                </div>
+            </div>          
+            <div class="optionsBD">
+                <div id="optionB">
+                    <input type="radio" name="options" class="opions" value="B">
+                    <label for="B" id="lbl-B">Sample text B</label>
+                </div>
+                <div id="optionD">
+                    <input type="radio" name="options" class="opions" value="D">
+                    <label for="D" id="lbl-D">Sample text D</label>
+                </div>
+            </div>
         </div>
+        <div class="btn-container">
+            
+            <button id="btn-previous">Previous Question</button>
+            <button id="btn-next">Next Question</button>
+        </div>
+        <!-- Custom Popup -->
+<div class="overlay" id="overlay"></div>
+<div class="popup" id="popup">
+    <h2>Time's Up!</h2>
+    <p>Your time for the exam has ended. Please submit your answers.</p>
+    <button class="submit-btn" onclick="submitExam()">Submit</button>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+</div>
+</div>
+      
+    <script>
+        // Set the exam duration in minutes
+    const examDurationMinutes = {{ record.duration }};
+    let timeRemaining = examDurationMinutes * 60; // Convert to seconds
 
-        <div class="questio">
-            <div class="formcon">
-                <div class="form">
-                    <label class="custom-radio">
-                        <input type="radio" name="option" value="1">
-                        <span class="radio-btn"></span>
-                        Hypertext Transfer Protocol Secure
-                    </label>
-                </div>
-                <div class="form">
-                    <label class="custom-radio">
-                        <input type="radio" name="option" value="2">
-                        <span class="radio-btn"></span>
-                        Hypertext Transfer Protocol Simple
-                    </label>
-                </div>
-            </div>
-            <div class="formcon">
-                <div class="form">
-                    <label class="custom-radio">
-                        <input type="radio" name="option" value="3">
-                        <span class="radio-btn"></span>
-                        Hypertext Transfer Protocol Secure Hypertext
-                    </label>
-                </div>
-                <div class="form">
-                    <label class="custom-radio">
-                        <input type="radio" name="option" value="4">
-                        <span class="radio-btn"></span>
-                        Hypertext Transfer Protocol Security
-                    </label>
-                </div>
-            </div>
-            <div class="btn">
-                <button>Next</button>
-            </div>
-        </div>
-    </div>
+    const timerElement = document.getElementById('examTimer');
+
+    // Update the countdown every 1 second
+    const countdown = setInterval(() => {
+        // Calculate minutes and seconds
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+
+        // Display the result in the timer element
+        timerElement.textContent = `Time Remaining: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+
+        // If the time is up, stop the timer and trigger exam submission
+        if (timeRemaining <= 0) {
+            clearInterval(countdown);
+            showPopup();
+            // submitExam();
+        }
+
+        timeRemaining--; // Decrease time by 1 second
+    }, 1000);
+
+
+
+
+      // Function to show the custom popup
+      function showPopup() {
+        popup.style.display = 'block';
+        overlay.style.display = 'block'; // Show the overlay
+    }
+
+    // Function to close the popup
+    function closePopup() {
+        popup.style.display = 'none';
+        overlay.style.display = 'none'; // Hide the overlay
+    }
+    </script>
+    <script src="{% static 'js/exam.js' %}"></script>
 </body>
 </html>

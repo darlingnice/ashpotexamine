@@ -1,4 +1,3 @@
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -6,28 +5,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashpot examination</title>
-    <link rel="stylesheet" href="{% static 'css/index.css'  %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-   
+    <link rel="stylesheet" href="{% static 'css/exam-onboarding.css' %}">
+    <title>Get started</title>
 </head>
 <body>
-    <div id="container">
-        <nav>
-            
-            <img src="{% static 'images/brand-logo.png' %}" alt="2019 logo full trans for white.png">
-<!-- 
-            <a href="https://www.ashpotmicrosystems.com" target="_blank">Continue with Ashpot</a> -->
-        </nav>
-    <!-- <div id="brand">
-        <h1>Start assessment <br>with <span>ashpot</span></h1>
-    </div> -->
-  <h1>Welcome {{ schedule.user }} You are about to take {{ schedule }}</h1>
-  <h3>Note this exam will last for {{ schedule.duration }} seconds and you are expected to take it before the end of {{ schedule.expiry_date }}</h3>
-  
-     <a href="{% url 'exam' %}">Start Exam</a> 
+    <nav>
+        <img src="{% static 'images/brand-logo.png' %}" alt="2019 logo full trans for white.png">
+        {% if schedule is None  %}  
+                <a href="https://www.ashpotmicrosystems.com" target="_blank">Continue with Ashpot</a>
+        {% endif %}
+    </nav>
 
-   
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="content">
+        <div class="mid">
+            <div class="imgg">
+                <img src="Assets/drawing.png" alt="drawing">
+            </div>
+            
+            <h1>Good morning,  {{ schedule.user }}</h1>
+            <p>Welcome to ashpot, you are about to take {{ schedule }}<br>
+            You are to answer a total of {{ schedule.num_questions }} questions and the alloted time is  {{ schedule.duration }}  minutes<br>Note this exam will expire by {{ schedule.expiry_date }} 12pm<br>
+            click on the button to get started </p>
+            <a href="{% url 'exam' id %}" id="btn-getstarted">Start Exam</a>
+            <!-- <Button>Get started</Button> -->
+        </div>
+    </div> 
 </body>
 </html>
