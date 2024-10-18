@@ -28,35 +28,8 @@ def home(request):
 def verify_mail(request):
     return render(request=request,template_name='admin-otp.html',content_type='text/html',context={})
 
-# def exam_onboarding(request, id):
-
-#     # Fetch all question IDs
-#     qtns = Question.objects.all()
-#     lst = [q.id for q in qtns]
-    
-#     # Shuffle the list of question IDs
-#     random.shuffle(lst)
-#        # Fetch scheduled exam info
-#     info = ScheduledExam.objects.filter(id=id).first()
-#     # Add the shuffled question IDs to list_of_exam_shuffled_questions_number
-#     global list_of_exam_shuffled_questions_number
-#     list_of_exam_shuffled_questions_number = lst[:info.num_questions ]
-
-
-#     if info is None:
-#         return render(request=request, template_name='exam-onboarding.html', content_type='text/html', context={"schedule": info})
-
-
-#     return render(request=request,template_name='exam-onboarding.html',content_type='text/html',context={"schedule":info,'id':info.id})
-
-    # # Pass the shuffled questions to the template or use them as needed
-    # return render(request, 'exam-onboarding.html', context={"schedule": info, "shuffled_questions": list_of_exam_shuffled_questions_number})
-
-
-
 
 def exam_onboarding(request,id):
-   
     info = ScheduledExam.objects.filter(id =id).first()
     if info is None :
         return render(request=request,template_name='exam-onboarding.html',content_type='text/html',context={"schedule":info})
@@ -69,7 +42,6 @@ def exam_onboarding(request,id):
     random.shuffle(lst)
     for x in lst[:info.num_questions]:
         list_of_exam_shuffled_questions_number.append(x)
-    print(list_of_exam_shuffled_questions_number)    
     return render(request=request,template_name='exam-onboarding.html',content_type='text/html',context={"schedule":info,'id':info.id})
 
 

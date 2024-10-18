@@ -19,15 +19,15 @@
     <div class="content">
         <div class="mid">
             <div class="imgg">
-                <img src="Assets/drawing.png" alt="drawing">
+                <img src="{% static 'images/drawing.png' %}" alt="drawing">
             </div>
             
             <h1>Good morning,  {{ schedule.user }}</h1>
             <p>Welcome to ashpot, you are about to take {{ schedule }}<br>
-            You are to answer a total of {{ schedule.num_questions }} questions and the alloted time is  {{ schedule.duration }}  minutes<br>Note this exam will expire by {{ schedule.expiry_date }} 12pm<br>
+            You are to answer a total of {{ schedule.num_questions }} questions and the alloted time is  {{ schedule.duration }}  minutes. Note this exam will expire on  {{ schedule.expiry_date }} by 12PM<br>
             click on the button to get started </p>
-            <a href="{% url 'exam' id %}" id="btn-getstarted">Start Exam</a>
-            <!-- <Button>Get started</Button> -->
+            
+            <a  href="{% url 'exam' id %}"><Button id="btn-getstarted">Start Exam</Button></a>
         </div>
     </div> 
 </body>
